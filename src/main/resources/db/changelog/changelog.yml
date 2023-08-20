@@ -1,0 +1,16 @@
+databaseChangeLog:
+  - include:
+      file: 2023.08.20-01-changelog.yml
+      relativeToChangelogFile: true
+  - include:
+      file: 2023.08.20-02-changelog.yml
+      relativeToChangelogFile: true
+  - include:
+      file: 2023.08.20-03-changelog.yml
+      relativeToChangelogFile: true
+  - include:
+      file: 2023.08.20-04-changelog.yml
+      relativeToChangelogFile: true
+  - include:
+      file: 2023.08.20-05-changelog.yml
+      relativeToChangelogFile: true

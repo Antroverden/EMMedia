@@ -1,0 +1,20 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+    banner-mode: 'off'
+  datasource: # настройки источника данных (базы)
+    username: user # логин для подключения к базе
+    password: password # пароль для подключения к базе
+    driverClassName: org.h2.Driver #драйвер для подключения к базе
+    jdbc-url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1;MODE=MySQL;NON_KEYWORDS=USER
+  jpa:
+    hibernate:
+      dialect: org.h2.Driver
+      ddl-auto: update
+  liquibase:
+    change-log: /db/changelog/changelog.yml
+    enabled: false
+
+settings:
+  secret: eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTY5MjU2MTQ3NCwiaWF0IjoxNjkyNTYxNDc0fQ.zh4sF8bnv18xDe_9_4eKpeyBkICNEhsOlpw1aTd7qbA
+  jwt-lifetime: 360

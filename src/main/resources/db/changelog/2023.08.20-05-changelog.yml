@@ -1,0 +1,58 @@
+databaseChangeLog:
+  - changeSet:
+      author: antroverden
+      id: 202308145
+      changes:
+        - createTable:
+            schemaName: public
+            tableName: posts
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: header
+                  type: varchar(25)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: text
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+        - createTable:
+            schemaName: public
+            tableName: post_to_image
+            columns:
+              - column:
+                  name: post_id
+                  type: bigint
+              - column:
+                  name: image_id
+                  type: bigint
+        - addForeignKeyConstraint:
+            baseColumnNames: post_id
+            baseTableName: post_to_image
+            constraintName: fk_post_image_on_post
+            referencedColumnNames: id
+            referencedTableName: posts
+        - addForeignKeyConstraint:
+            baseColumnNames: image_id
+            baseTableName: post_to_image
+            constraintName: fk_post_image_on_image
+            referencedColumnNames: id
+            referencedTableName: images

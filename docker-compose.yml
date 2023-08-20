@@ -1,0 +1,19 @@
+version: '3.7'
+services:
+  emmedia:
+    build: .
+    container_name: emmedia
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+
+  postgres:
+    container_name: postgres-emmedia
+    image: "postgres:14"
+    environment:
+      POSTGRES_USER: antro
+      POSTGRES_PASSWORD: qwerty
+      POSTGRES_DB: antro
+    ports:
+      - "5432:5432"

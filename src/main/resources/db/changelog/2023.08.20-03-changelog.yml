@@ -1,0 +1,34 @@
+databaseChangeLog:
+  - changeSet:
+      author: antroverden
+      id: 202308203
+      changes:
+        - createTable:
+            schemaName: public
+            tableName: friendship
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: user_id
+                  type: bigint
+              - column:
+                  name: friend_id
+                  type: bigint
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: friendship
+            constraintName: fk_user_on_friend
+            referencedColumnNames: id
+            referencedTableName: users
+        - addForeignKeyConstraint:
+            baseColumnNames: friend_id
+            baseTableName: friendship
+            constraintName: fk_friend_on_user
+            referencedColumnNames: id
+            referencedTableName: users
