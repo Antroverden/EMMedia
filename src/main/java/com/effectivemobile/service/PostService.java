@@ -101,12 +101,8 @@ public class PostService {
                 .toList();
         Pageable pageable = null;
         switch (order) {
-            case "desc" -> {
-                pageable = PageRequest.of(page, size, Sort.by("creation").descending());
-            }
-            case "asc" -> {
-                pageable = PageRequest.of(page, size, Sort.by("creation").ascending());
-            }
+            case "desc" -> pageable = PageRequest.of(page, size, Sort.by("creation").descending());
+            case "asc" -> pageable = PageRequest.of(page, size, Sort.by("creation").ascending());
         }
         List<Post> posts = postRepository.findAllByUser_IdIn(userIdList, pageable);
         return postMapper.toResponseDtos(posts);
