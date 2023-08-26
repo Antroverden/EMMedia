@@ -16,8 +16,11 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-    - name: Build with Maven
-      run: mvn -B package --file pom.xml
+        
+    - name: Check and Build application
+      run: |
+        mvn install -P check --no-transfer-progress
+        docker-compose build
       
   docker:
     runs-on: ubuntu-latest
