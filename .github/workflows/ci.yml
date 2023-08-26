@@ -46,7 +46,9 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
         name: Build and push
-        run: |
-         docker build -t antroverden/emmedia:v2.11 .
-         docker push antroverden/emmedia:v2.11
+        uses: docker/build-push-action@v4
+        with:
+          context: EMMedia/
+          push: true
+          tags: user/app:latest
  
