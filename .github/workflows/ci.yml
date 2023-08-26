@@ -16,9 +16,10 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-    - name: Build with Maven
-      run: mvn clean package
-      
+    - name: Check and Build application
+      run: |
+          mvn clean package
+          docker build -t antroverden/emmedia:v2.11 .
     -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -33,7 +34,4 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
     -
         name: Build and push
-        uses: docker/build-push-action@v4
-        with:
-          push: true
-          tags: user/app:latest
+        run: docker push antroverden/emmedia:v2.11
