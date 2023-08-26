@@ -19,7 +19,7 @@ jobs:
         
     - name: Check and Build application
       run: |
-        mvn install -P
+        mvn install
       
   docker:
     runs-on: ubuntu-latest
