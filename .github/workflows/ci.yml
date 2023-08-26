@@ -19,8 +19,7 @@ jobs:
         
     - name: Check and Build application
       run: |
-        mvn install -P check --no-transfer-progress
-        docker-compose build
+        mvn install -P
       
   docker:
     runs-on: ubuntu-latest
@@ -47,8 +46,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
         name: Build and push
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          push: true
-          tags: user/app:latest
+        run: |
+         docker build -t antroverden/emmedia:v2.11 .
+         docker push antroverden/emmedia:v2.11
+ 
