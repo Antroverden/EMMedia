@@ -42,4 +42,4 @@ jobs:
        script: |
            docker-compose down
            docker rmi antroverden/emmedia:v2.11
-           docker-compose up
+           docker-compose up -d
