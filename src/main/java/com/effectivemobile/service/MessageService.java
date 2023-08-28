@@ -52,7 +52,7 @@ public class MessageService {
     }
 
     @Transactional
-    public List<Message> getHistory(Long userId, String username) {
+    public List<MessageResponseDto> getHistory(Long userId, String username) {
         User friend = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("Пользователь не найден"));
         User user = userRepository.findByLogin(username)
@@ -63,8 +63,7 @@ public class MessageService {
             List<Message> messagesFriendToUser = messageRepository.findAllByFirstUser_IdAndSecondUser_Id(userId, user.getId());
             List<Message> messagesUserToFriend = messageRepository.findAllByFirstUser_IdAndSecondUser_Id(user.getId(), userId);
             messagesFriendToUser.addAll(messagesUserToFriend);
-//            return ChatMapper.toResponseDtos(messagesFriendToUser);
-            return List.of();
+            return messageMapper.toResponseDtos(messagesFriendToUser);
         } else {
             throw new ConflictException("Пользователи не друзья");
         }

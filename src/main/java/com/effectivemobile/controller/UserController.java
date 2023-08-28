@@ -10,6 +10,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
@@ -42,12 +43,14 @@ public class UserController {
     }
 
     @PutMapping("/friends/{friendId}")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER')")
     @Operation(description = "Добавить пользователя в друзья")
     public HttpStatus addFriend(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long friendId) {
         return userService.addFriend(userDetails.getUsername(), friendId);
     }
 
     @DeleteMapping("/friends/{friendId}")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER')")
     @Operation(description = "Удалить пользователя из друзей")
     public HttpStatus removeFriend(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long friendId) {
         return userService.removeFriend(userDetails.getUsername(), friendId);

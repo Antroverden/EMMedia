@@ -1,6 +1,5 @@
 package com.effectivemobile.controller;
 
-import com.effectivemobile.entity.Message;
 import com.effectivemobile.model.request.MessageDto;
 import com.effectivemobile.model.response.MessageResponseDto;
 import com.effectivemobile.service.MessageService;
@@ -9,6 +8,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +26,7 @@ public class MessageController {
     MessageService messageService;
 
     @Operation(summary = "Отправить сообщение пользователю")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER')")
     @PostMapping("{userId}")
     public MessageResponseDto sendMessage(@PathVariable Long userId,
                                           @RequestBody @Valid MessageDto messageDto,
@@ -34,9 +35,10 @@ public class MessageController {
     }
 
     @GetMapping("/{id}/history")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER')")
     @Operation(summary = "Получить историю сообщений с юзером")
-    public List<Message> getMessages(@PathVariable Long id,
-                                     @AuthenticationPrincipal UserDetails userDetails) {
+    public List<MessageResponseDto> getMessages(@PathVariable Long id,
+                                                @AuthenticationPrincipal UserDetails userDetails) {
         return messageService.getHistory(id, userDetails.getUsername());
     }
 }
