@@ -40,8 +40,6 @@ jobs:
        password: ${{ secrets.PASSWORD }}
        port: ${{ secrets.PORT }}
        script: |
-           docker-compose pull
-           docker compose stop -t 5
-           docker rmi antroverden/emmedia:v2.11
+           docker-compose down --rmi all emmedia
            docker-compose up -d
            
