@@ -40,6 +40,6 @@ jobs:
        password: ${{ secrets.PASSWORD }}
        port: ${{ secrets.PORT }}
        script: |
-           docker-compose down --rmi all emmedia
+           docker-compose down
            docker-compose up -d
            
