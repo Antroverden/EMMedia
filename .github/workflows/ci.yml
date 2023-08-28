@@ -39,4 +39,7 @@ jobs:
        username: ${{ secrets.USERNAME }}
        password: ${{ secrets.PASSWORD }}
        port: ${{ secrets.PORT }}
-       script: whoami
+       script: |
+           docker-compose down
+           docker rmi antroverden/emmedia:v2.11
+           docker-compose up
